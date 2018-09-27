@@ -16,7 +16,6 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	private static final int MININITIALENERGY = 10;
 	private static final int MAXINITIALENERGY = 90;
 	private static final int STEPENERGYLOSS = 5;
-	private static final int BIRTHENERGYLOSS = 40;
 	private static final int GRASSENERGY = 10;
 	
 	private int x;
@@ -25,18 +24,20 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	private static final int[][] validMoves = {{0,1}, {0,-1}, {1,0}, {-1,0}};
 	private static int IDNumber = 0;
 	private int ID;
+	private int birthEnergyLoss = MININITIALENERGY;
 	
 	private RabbitsGrassSimulationSpace simulationSpace;
 	
 	private Object2DGrid grassSpace;
 	
 	
-	public RabbitsGrassSimulationAgent(){
+	public RabbitsGrassSimulationAgent(int birthEnergyLoss){
 		x = -1;
 		y = -1;
 		energy = (int)((Math.random() * (MAXINITIALENERGY - MININITIALENERGY)) + MININITIALENERGY);
 	    IDNumber++;
 	    ID = IDNumber;
+	    this.birthEnergyLoss = birthEnergyLoss;
 	}
 	
 	public void setXY(int newX, int newY){
@@ -122,8 +123,8 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	}
 	
 	public void giveBirth() {
-		energy -= BIRTHENERGYLOSS;
-    	System.out.println("R-" + ID + " lost " + BIRTHENERGYLOSS + ".");
+		energy -= birthEnergyLoss;
+    	System.out.println("R-" + ID + " lost " + birthEnergyLoss + ".");
     	report();
 	}
 
