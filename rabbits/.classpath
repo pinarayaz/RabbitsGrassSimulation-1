@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="guresti-ayaz-in/src"/>
+	<classpathentry kind="lib" path="lib/repast.jar"/>
+	<classpathentry kind="lib" path="/home/bengisu2/eclipse-workspace/IntelligentAgents/additional_jar_libs/colt.jar"/>
+	<classpathentry kind="lib" path="/home/bengisu2/eclipse-workspace/IntelligentAgents/additional_jar_libs/plot.jar"/>
+	<classpathentry kind="output" path="guresti-ayaz-in/bin"/>
+</classpath>
