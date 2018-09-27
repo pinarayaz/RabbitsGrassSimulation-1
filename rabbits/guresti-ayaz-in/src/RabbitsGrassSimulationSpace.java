@@ -102,4 +102,26 @@ private Object2DGrid rabbitSpace;
 		return retVal;
 	}
 	
+	public int getTotalRabbits() {
+		int totalRabbits = 0;
+		for(int i = 0; i < grassSpace.getSizeX(); i++){
+		    for(int j = 0; j < grassSpace.getSizeY(); j++){
+		        if(isCellOccupied(i, j)) {
+		        	totalRabbits += 1;
+		    	}
+		    }
+		}
+		return totalRabbits;
+	}
+	
+	public int getTotalGrass() {
+		int totalGrass = 0;
+		for(int i = 0; i < grassSpace.getSizeX(); i++){
+		    for(int j = 0; j < grassSpace.getSizeY(); j++){
+		        totalGrass += (int)grassSpace.getObjectAt(i, j);
+		    }
+		}
+		return totalGrass;
+	}
+	
 }

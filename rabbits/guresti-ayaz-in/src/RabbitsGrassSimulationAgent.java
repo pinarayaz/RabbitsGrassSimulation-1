@@ -26,7 +26,9 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	private static int IDNumber = 0;
 	private int ID;
 	
-	private RabbitsGrassSimulationSpace grassSpace;
+	private RabbitsGrassSimulationSpace simulationSpace;
+	
+	private Object2DGrid grassSpace;
 	
 	
 	public RabbitsGrassSimulationAgent(){
@@ -47,8 +49,9 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 		return validMoves[i];
 	}
 	
-	public void setRabbitsGrassSimulationSpace(RabbitsGrassSimulationSpace grassSpace){
-	    this.grassSpace = grassSpace;
+	public void setRabbitsGrassSimulationSpace(RabbitsGrassSimulationSpace simulationSpace){
+	    this.simulationSpace = simulationSpace;
+	    grassSpace = simulationSpace.getCurrentGrassSpace();
 	}
 
 	public int getX() {
@@ -87,13 +90,11 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 		if(energy > STEPENERGYLOSS) {
 			int[] move = setMove();
 			
-			Object2DGrid grid = grassSpace.getCurrentRabbitSpace();
-			
-		    int newX = (int)((x + move[0]) % (grid.getSizeX()));
-		    int newY = (int)((y + move[1]) % (grid.getSizeY()));
+		    int newX = (int)((x + move[0]) % (grassSpace.getSizeX()));
+		    int newY = (int)((y + move[1]) % (grassSpace.getSizeY()));
 		    
-		    newX = (newX >= 0) ? newX : (newX + grid.getSizeX());
-		    newY = (newY >= 0) ? newY : (newY + grid.getSizeY());
+		    newX = (newX >= 0) ? newX : (newX + grassSpace.getSizeX());
+		    newY = (newY >= 0) ? newY : (newY + grassSpace.getSizeY());
 		    
 		    int oldX = x;
 		    int oldY = y; 
@@ -101,14 +102,14 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 		    if(tryMove(newX, newY)){
 		    	retVal = true;
 		    	System.out.println("R-" + ID + " lost " + STEPENERGYLOSS + ".");
-		    	int gainedEnergy = GRASSENERGY * grassSpace.eatGrassAt(newX, newY);
+		    	int gainedEnergy = GRASSENERGY * simulationSpace.eatGrassAt(newX, newY);
 		    	energy += gainedEnergy;
 		    	System.out.println("R-" + ID + " gained " + gainedEnergy + ".");
 		    }
 		    else{
-		    	grassSpace.moveRabbitAt(x, y, oldX, oldY);
+		    	simulationSpace.moveRabbitAt(x, y, oldX, oldY);
 		        System.out.println("R-" + ID + " collided with " 
-		        		+ grassSpace.getRabbitAt(newX, newY).getID() + " at " +
+		        		+ simulationSpace.getRabbitAt(newX, newY).getID() + " at " +
 		        		newX + ", " + newY +  "and returned to previous location.");
 		    }
 		}
@@ -117,7 +118,7 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	}
 	
 	public boolean tryMove(int newX, int newY){
-	    return grassSpace.moveRabbitAt(x, y, newX, newY);
+	    return simulationSpace.moveRabbitAt(x, y, newX, newY);
 	}
 	
 	public void giveBirth() {
@@ -127,8 +128,8 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	}
 
 	public void draw(SimGraphics graphic) {
-		if(!grassSpace.isCellOccupied(this.getX(), this.getY())) {
-			if(grassSpace.getGrassAt(this.getX(), this.getY()) == 0) {
+		if(!simulationSpace.isCellOccupied(this.getX(), this.getY())) {
+			if(simulationSpace.getGrassAt(this.getX(), this.getY()) == 0) {
 				graphic.drawFastRoundRect(Color.BLACK);
 			}
 			else {
