@@ -27,7 +27,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		private static final int GRIDSIZEX = 20;
 		private static final int GRIDSIZEY = 20;
 		private static final int BIRTHTHRESHOLD = 100;
-		private static final int GRASSGROWTHRATE = 300;
+		private static final int GRASSGROWTHRATE = 5;
 		private static final int INITIALGRASS = 250;
 		
 		private int numRabbits = NUMRABBITS;
@@ -109,9 +109,8 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 			      }
 		          
 		          int deadRabbits = reapDeadRabbits();
-		          /*for(int i =0; i < deadRabbits; i++){
-		              addNewRabbit();
-		          }*/
+		          
+		          grassSpace.growGrass(GRASSGROWTHRATE);
 		          
 		          displaySurf.updateDisplay();
 		        }

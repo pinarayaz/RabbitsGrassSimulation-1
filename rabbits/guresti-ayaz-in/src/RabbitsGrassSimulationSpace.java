@@ -52,8 +52,7 @@ private Object2DGrid rabbitSpace;
 	
 	public Object2DGrid getCurrentRabbitSpace(){
 	    return rabbitSpace;
-	}
-	
+	}	
 
 	public boolean isCellOccupied(int x, int y){
 	    return (rabbitSpace.getObjectAt(x, y)!=null);
