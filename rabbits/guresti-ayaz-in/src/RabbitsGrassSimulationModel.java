@@ -108,7 +108,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 			            }
 			      }
 		          
-		          int deadRabbits = reapDeadRabbits();
+		          reapDeadRabbits();
 		          
 		          grassSpace.growGrass(GRASSGROWTHRATE);
 		          

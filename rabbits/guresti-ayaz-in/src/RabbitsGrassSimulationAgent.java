@@ -1,6 +1,5 @@
 
 import java.awt.Color;
-import java.util.Map;
 
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
@@ -27,10 +26,7 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	private static int IDNumber = 0;
 	private int ID;
 	
-	
-	private RabbitsGrassSimulationModel grassModel;
 	private RabbitsGrassSimulationSpace grassSpace;
-	private RabbitsGrassSimulationSpace rabbitSpace;
 	
 	
 	public RabbitsGrassSimulationAgent(){
@@ -78,8 +74,6 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 	
 	public void step(){
 		report();
-	    
-	    Object2DGrid grid = grassSpace.getCurrentRabbitSpace();
 	    
 	    if(move()) {
 	    	energy -= STEPENERGYLOSS;
